@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
+import * as fs from 'fs'
 import packageJson from 'package-json'
 import * as path from 'path'
-import * as fs from 'fs'
 
 /** An _incomplete_ representation of package.json. */
 interface PackageFile {
@@ -35,7 +35,7 @@ async function run(): Promise<void> {
         core.setOutput('is-new-version', isNewVersion.toString())
         core.setOutput('published-version', packageNpm['dist-tags'].latest)
         core.setOutput('committed-version', packageFile.version)
-    } catch (error) {
+    } catch (error: any) {
         core.setFailed(error.message)
     }
 }
